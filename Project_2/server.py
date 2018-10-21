@@ -3,12 +3,18 @@ import tornado.websocket
 import tornado.ioloop
 import tornado.web
 import socket
+
+import MySQLdb
+
 '''
 This is a simple Websocket Echo server that uses the Tornado websocket handler.
 Please run `pip install tornado` with python of version 2.7.9 or greater to install tornado.
 This program will echo back the reverse of whatever it recieves.
 Messages are output to the terminal for debuggin purposes.
 '''
+
+db = MySQLdb.connect(host="localhost",user="root",passwd="root",db="pythonspot")
+cur = db.cursor()
 
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
@@ -34,6 +40,12 @@ application = tornado.web.Application([
 
 
 if __name__ == "__main__":
+    cur.execute("SELECT * FROM hum2 ORDER by id DESC LIMIT 1")
+    for row in cur.fetchall():
+        minhum=row[4]
+        maxhum=row[3]
+        print "minhum " + minhum + " maxhum " + maxhum
+        
     http_server = tornado.httpserver.HTTPServer(application)
     http_server.listen(8888)
     myIP = socket.gethostbyname(socket.gethostname())
