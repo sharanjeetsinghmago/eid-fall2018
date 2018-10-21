@@ -32,6 +32,55 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 ts = row[3]
             self.write_message("Latest Temp :" + temp_last +" Time : " +ts)
 
+        if message == "get_humid_last":
+            cur.execute("SELECT * FROM hum2 ORDER by id DESC LIMIT 1")
+            for row in cur.fetchall():
+                humid_last = row[1]
+                ts = row[3]
+            self.write_message("Latest Humid :" + temp_last +" Time : " +ts)
+
+        if message == "get_temp_avg":
+            cur.execute("SELECT * FROM temp2 ORDER by id DESC LIMIT 1")
+            for row in cur.fetchall():
+                temp_avg = row[2]
+                ts = row[3]
+            self.write_message("Average Temp :" + temp_last +" Time : " +ts)
+
+        if message == "get_humid_avg":
+            cur.execute("SELECT * FROM hum2 ORDER by id DESC LIMIT 1")
+            for row in cur.fetchall():
+                hummid_avg = row[2]
+                ts = row[3]
+            self.write_message("Average Humid :" + temp_last +" Time : " +ts)
+
+        if message == "get_temp_max":
+            cur.execute("SELECT * FROM temp2 ORDER by id DESC LIMIT 1")
+            for row in cur.fetchall():
+                temp_max = row[5]
+                ts = row[3]
+            self.write_message("Max Temp :" + temp_last +" Time : " +ts)
+
+        if message == "get_humid_max":
+            cur.execute("SELECT * FROM hum2 ORDER by id DESC LIMIT 1")
+            for row in cur.fetchall():
+                humid_max = row[5]
+                ts = row[3]
+            self.write_message("Max Humid :" + temp_last +" Time : " +ts)
+
+        if message == "get_temp_min":
+            cur.execute("SELECT * FROM temp2 ORDER by id DESC LIMIT 1")
+            for row in cur.fetchall():
+                temp_min = row[4]
+                ts = row[3]
+            self.write_message("Min Temp :" + temp_last +" Time : " +ts)
+
+        if message == "get_humid_min":
+            cur.execute("SELECT * FROM hum2 ORDER by id DESC LIMIT 1")
+            for row in cur.fetchall():
+                humid_min = row[4]
+                ts = row[3]
+            self.write_message("Min Humid :" + temp_last +" Time : " +ts)
+
     def on_close(self):
         print ("connection closed")
 
