@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Embedded Interface Design Project 2</title>
+
+    <meta charset = "utf-8">
+        <title>jQuery UI Buttons functionality</title>
+        <link href = "https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+            rel = "stylesheet">
+        <script src = "https://code.jquery.com/jquery-1.12.1.js"></script>
+        <script src = "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script>
+
+    			// defining the JQuery UI elements
+          $(document).ready(function(){
+    				$( "#popup" ).dialog({autoOpen: false, title: 'Basic dialog'});
+    				$( "#button-1, #button-2, #button-3, #button-4" ).button();
+            $( "button").button();
+            $( "#button-1" ).click(function(){$(this).hide();});
+            $( "#button-2" ).click(function(){$(this).hide();});
+          });
+
+          function changelabel(iButton){
+            let lbl = document.getElementById('buttonLabel');
+            var txt ='Something happened ?';
+            lbl.iinerText = txt;
+          }
+
+        </script>
+
+    <style>
+
+    .flex-container {
+      display: flex;
+      flex-wrap: nowrap;
+      background-color: DodgerBlue;
+
+    }
+
+    .flex-container > div {
+      background-color: #f1f1f1;
+      width: 100px;
+      margin: 10px;
+      text-align: center;
+      line-height: 75px;
+      font-size: 30px;
+    }
+
+    p{
+      background-color: DodgerBlue;
+      width: 20%;
+      padding:10px;
+      margin: 50px;
+      display: inline-block;
+    }
+
+    .grid-container  {
+      display: grid;
+      grid-template-columns: auto auto;
+      background-color: #2196F3;
+      padding: 40px;
+      grid-column-gap: 80px;
+      grid-row-gap: 20px;
+    }
+    .grid-container > div {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    </style>
+  </head>
+
+  <body>
+
+    <button id = "button-1"> Oye hoye</button>
+    <button id = "button-2"> Ahaa Ahaa</button>
+    <a id = "button-3" href = ""> Refresh</a>
+
+    <button>Last Temp</button>
+    <button>Average Temp</button>
+    <button>Highest Temp</button>
+    <button>Lowest Temp</button>
+    <button>Last Humidity</button>
+    <button>Average Humidity</button>
+    <button>Highest Humidity</button>
+    <button>Lowest Humidity</button>
+
+  <br><br>
+
+  <div class="grid-container">
+    <div>
+      Temperature<br>
+      <button >Last Temp</button>
+    </div>
+    <div>
+      Humidity<br>
+      <button>Last Humidity</button>
+    </div>
+    <div>
+      Average Temperature<br>
+      <button>Average Temp</button>
+    </div>
+    <div>
+      Average Humidity<br>
+    <button>Average Humidity</button>
+    </div>
+    <div>
+      Highest Temp<br>
+      <button>Highest Temp</button>
+    </div>
+    <div>
+      Highest Humidity<br>
+      <button>Average Temp</button>
+    </div>
+    <div>
+      Lowest Temp<br>
+      <button>Lowest Temp</button>
+    </div>
+    <div>
+      Lowest Humidity<br>
+      <button>Lowest Humidity</button>
+    </div>
+
+  </div>
+
+
+
+  </body>
+
+</html>
