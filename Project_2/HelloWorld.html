@@ -66,6 +66,48 @@
             ws.send($("#message").val());
         });
 
+        $("#temp_last").click(function(evt) {
+            log("Sending Message: "+"get_temp_last");
+            ws.send("get_temp_last");
+        });
+
+        $("#humid_last").click(function(evt) {
+            log("Sending Message: "+"get_humid_last");
+            ws.send("get_humid_last");
+        });
+
+        $("#temp_avg").click(function(evt) {
+            log("Sending Message: "+"get_temp_avg");
+            ws.send("get_temp_avg");
+        });
+
+        $("#humid_avg").click(function(evt) {
+            log("Sending Message: "+"get_humid_avg");
+            ws.send("get_humid_avg");
+        });
+
+        $("#temp_max").click(function(evt) {
+            log("Sending Message: "+"get_temp_max");
+            ws.send("get_temp_max");
+        });
+
+        $("#humid_min").click(function(evt) {          
+            log("Sending Message: "+"get_humid_min");
+            ws.send("get_humid_min");
+        });
+
+        $("#temp_min").click(function(evt) {
+            log("Sending Message: "+"get_temp_min");
+            ws.send("get_temp_min");
+        });
+
+        $("#humid_max").click(function(evt) {
+            $(this).hide();
+            log("Sending Message: "+"get_humid_max");
+            ws.send("get_humid_max");
+        });
+
+
       });
     </script>
   </head>
@@ -86,6 +128,14 @@
         <label for="message">message:</label>
         <input type="text" id="message" value="Hello World!"/><br />
         <input type="submit" id="send" value="send" />
+        <input type="submit" id="temp_last" value="temp_last" />
+        <input type="submit" id="humid_last" value="humid_last" />
+        <input type="submit" id="temp_avg" value="temp_avg" />
+        <input type="submit" id="humid_avg" value="humid_avg" />
+        <input type="submit" id="temp_max" value="temp_max" />
+        <input type="submit" id="humid_max" value="humid_max" />
+        <input type="submit" id="temp_min" value="temp_min" />
+        <input type="submit" id="humid_min" value="humid_min" />
     </div>
     <div id="terminal">
 

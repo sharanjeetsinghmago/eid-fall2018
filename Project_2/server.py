@@ -17,8 +17,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         print 'message received:  %s' % message
         # Reverse Message and send it back
-        print 'sending back message: %s' % message[::-1]
-        self.write_message(message[::-1])
+        # print 'sending back message: %s' % message[::-1]
+        # self.write_message(message[::-1])
+        if message == "get_temp_last":
+            self.write_message(message+": pikapi")
 
     def on_close(self):
         print 'connection closed'
