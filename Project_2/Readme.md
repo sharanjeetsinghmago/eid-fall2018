@@ -13,8 +13,9 @@ Basic Requirements:
 5.Web page implemntation, displaying data parameters upon request
   
 Extra Credits:
-1.Unit conversion
-2.Secure Webpage login
+1.Secure Webpage login
+2.Improved UI using CSS elements
+3.Temperature data available in F and K scales
 
 Build Steps:
 The GUI file (project1.ui) and the python code (pro.py) is saved in the same file and can be run using command line as :sudo Python3 pro.py
