@@ -27,4 +27,4 @@ Refrence links:
 2.https://www.python-course.eu/sql_python.php
 3.https://circuitpython.readthedocs.io/projects/dht/en/latest/
 5.https://github.com/adafruit/circuitpython
-6.
+6.https://www.w3school.com
