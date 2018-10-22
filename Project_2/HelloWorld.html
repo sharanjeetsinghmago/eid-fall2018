@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
   <head>
-    <title>WebSockets Hello World</title>
+    <title>Embedded Interface Design Project 2 Client</title>
+
     <meta charset="utf-8" />
     <style type="text/css">
       body {
@@ -9,7 +10,16 @@
         min-width: 500px;
       }
     </style>
-    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <!-- <script src="http://code.jquery.com/jquery.min.js"></script> -->
+
+    <title>jQuery UI Buttons functionality</title>
+    <link href = "https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+        rel = "stylesheet">
+    <script src = "https://code.jquery.com/jquery-1.12.1.js"></script>
+    <script src = "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
     <script>
 
       // log function
@@ -19,9 +29,30 @@
       };
 
       $(document).ready(function () {
-        $("div#message_details").hide()
+        $("div#connection_details").hide();
+        $("div#message_details").hide();
+        $("div#sensor_buttons").hide();
+
+        $("input").button();
 
         var ws;
+
+        $("#login").click(function(evt)
+        {
+          var user = $("#user").val();
+          var pass = $("#pass").val();
+
+          if( user == "mango" && pass == "mango")
+          {
+            alert("Login Successful");
+            $("div#connection_details").show()
+            $("div#login_details").hide()
+          }
+          else
+          {
+            alert("Incorrect Credentials !!!");
+          }
+        });
 
         $("#open").click(function(evt) {
           evt.preventDefault();
@@ -35,8 +66,9 @@
 
           // Handle incoming websocket message callback
           ws.onmessage = function(evt) {
-            log("Message Received: " + evt.data)
-            alert("message received: " + evt.data);
+            log(evt.data)
+            alert(evt.data);
+
             };
 
           // Close Websocket callback
@@ -47,15 +79,18 @@
             $("#port").css("background", "#ff0000");
             $("#uri").css("background",  "#ff0000");
             $("div#message_details").empty();
-
+            $("div#sensor_buttons").hide()
             };
 
           // Open Websocket callback
           ws.onopen = function(evt) {
+            alert("Connection Opened");
             $("#host").css("background", "#00ff00");
             $("#port").css("background", "#00ff00");
             $("#uri").css("background", "#00ff00");
-            $("div#message_details").show();
+
+            $("div#sensor_buttons").show();
+            $("div#connection_details").hide();
             log("***Connection Opened***");
           };
         });
@@ -68,6 +103,7 @@
 
         $("#temp_last").click(function(evt) {
             log("Sending Message: "+"get_temp_last");
+            //data.push(["Hello",1]);
             ws.send("get_temp_last");
         });
 
@@ -91,7 +127,7 @@
             ws.send("get_temp_max");
         });
 
-        $("#humid_min").click(function(evt) {          
+        $("#humid_min").click(function(evt) {
             log("Sending Message: "+"get_humid_min");
             ws.send("get_humid_min");
         });
@@ -102,43 +138,148 @@
         });
 
         $("#humid_max").click(function(evt) {
-            $(this).hide();
             log("Sending Message: "+"get_humid_max");
             ws.send("get_humid_max");
+        });
+
+        $("#temp_f").click(function(evt) {
+            log("Sending Message: "+"get_temp_f");
+            ws.send("get_temp_f");
+        });
+
+        $("#temp_k").click(function(evt) {
+            log("Sending Message: "+"get_temp_k");
+            ws.send("get_temp_k");
         });
 
 
       });
     </script>
+
+    <style>
+
+        .grid-container  {
+          display: grid;
+          grid-template-columns: auto auto;
+          //background-color: #2196F3;
+          padding: 50px;
+          grid-column-gap: 80px;
+          grid-row-gap: 20px;
+          justify-content: center;
+        }
+        .grid-container > div {
+          background-color: #2196F3;
+          border: 1px solid rgba(0, 0, 0, 0.8);
+          padding: 20px;
+
+          text-align: center;
+        }
+
+        body {
+          background-image: url("https://www.outdoorproject.com/sites/default/files/styles/cboxshow/public/rainier2013_2.jpg?itok=YeEBAyej");
+          background-size: cover;
+          //background-repeat: no-repeat;
+        }
+
+        .terminal
+        {
+          background-color: #2196F3;
+        }
+
+    </style>
+
   </head>
 
   <body>
-    <h1>WebSockets Hello World</h1>
+
+    </br></br>
+
+    <font size="7" color=#dddddd >Embedded Interface Design</font>
+
+    </br></br>
+
+    <font size="6" color=#dddddd >Project 2</font>
+
+    </br></br>
+
+    <div id="login_details">
+      <font color=#eeeeee>Username : </font>
+      <input type="text" id="user" value="mango" style="background:#2196F3;"/></br></br>
+      <font color=#eeeeee>Password : </font>
+      <input type="text" id="pass" value="mango" style="background:#2196F3;"/></br></br>
+      <input type="submit" id="login" value="login" />
+    </div>
+
     <div id="connection_details">
-      <label for="host">host:</label>
-      <input type="text" id="host" value="localhost" style="background:#ff0000;"/><br />
-      <label for="port">port:</label>
-      <input type="text" id="port" value="8888" style="background:#ff0000;"/><br />
-      <label for="uri">uri:</label>
-      <input type="text" id="uri" value="/ws" style="background:#ff0000;"/><br />
+      <font color=#eeeeee>Host : </font>
+      <input type="text" id="host" value="10.0.0.153" style="background:#2196F3;"/></br></br>
+      <font color=#eeeeee>Port : </font>
+      <input type="text" id="port" value="8888" style="background:#2196F3;"/></br></br>
+      <font color=#eeeee>uri : </font>
+      <input type="text" id="uri" value="/ws" style="background:#2196F3;"/><br /></br>
       <input type="submit" id="open" value="open" />
     </div>
+
+
     <div id="message_details">
         </br></br>
         <label for="message">message:</label>
         <input type="text" id="message" value="Hello World!"/><br />
+        </br>
         <input type="submit" id="send" value="send" />
-        <input type="submit" id="temp_last" value="temp_last" />
-        <input type="submit" id="humid_last" value="humid_last" />
-        <input type="submit" id="temp_avg" value="temp_avg" />
-        <input type="submit" id="humid_avg" value="humid_avg" />
-        <input type="submit" id="temp_max" value="temp_max" />
-        <input type="submit" id="humid_max" value="humid_max" />
-        <input type="submit" id="temp_min" value="temp_min" />
-        <input type="submit" id="humid_min" value="humid_min" />
+      </br></br>
     </div>
-    <div id="terminal">
+
+
+    <div id="sensor_buttons" class="grid-container">
+
+      <div>
+        Latest Temperature :
+        <input type="submit" id="temp_last" value="request" />
+      </div>
+      <div>
+        Latest Humidity :
+        <input type="submit" id="humid_last" value="request" />
+      </div>
+      <div>
+        Average Temperature :
+        <input type="submit" id="temp_avg" value="request" />
+      </div>
+      <div>
+        Average Humidity :
+        <input type="submit" id="humid_avg" value="request" />
+      </div>
+      <div>
+        Maximum Temperature :
+        <input type="submit" id="temp_max" value="request" />
+      </div>
+      <div>
+        Maximum Humidity :
+        <input type="submit" id="humid_max" value="request" />
+      </div>
+      <div>
+        Minimim Temperature :
+        <input type="submit" id="temp_min" value="request" />
+      </div>
+      <div>
+        Minimum Humidity :
+        <input type="submit" id="humid_min" value="request" />
+      </div>
+      <div>
+        Temperature in Fahrenheit :
+        <input type="submit" id="temp_f" value="request" />
+      </div>
+      <div>
+        Temperature in Kelvin :
+        <input type="submit" id="temp_k" value="request" />
+      </div>
 
     </div>
+
+    <div id="terminal" style="color:White">
+
+    </div>
+
+
   </body>
 </html>

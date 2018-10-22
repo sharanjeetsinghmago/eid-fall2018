@@ -25,7 +25,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         # Reverse Message and send it back
         # print 'sending back message: %s' % message[::-1]
         # self.write_message(message[::-1])
-        
+
         db = MySQLdb.connect(host="localhost",user="root",passwd="root",db="pythonspot")
         cur = db.cursor()
 
@@ -98,8 +98,6 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 humid_min = row[7]
                 ts = row[3]
             self.write_message("Temperature :" + humid_min +"K Time : " +ts)
-
-
     def on_close(self):
         print ("connection closed")
 
